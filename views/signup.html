@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form onsubmit="event.preventDefault()">
+      <label for="surname">Nom de famille *</label>
+      <input type="text" name="surname" required />
+      <label for="name">Prénom *</label>
+      <input type="text" name="name" required />
+      <label for="birth">Date de naissance *</label>
+      <input type="date" name="birth" required />
+      <label for="address">Adresse *</label>
+      <input type="text" name="address" required />
+      <label for="city">Ville *</label>
+      <input type="text" name="city" required />
+      <label for="phone">Téléphone *</label>
+      <input type="tel" name="phone" required />
+      <label for="email">Email *</label>
+      <input type="email" name="email" required />
+      <label for="password">Mot de passe *</label>
+      <input type="password" name="password" required />
+      <label for="card_identity">Carte d'indentité</label>
+      <input type="file" name="card_identity" />
+      <button onclick="signUp()">Envoyer la demande</button>
+    </form>
+    <script>
+      const signUp = async () => {
+        event.preventDefault();
+        const surname = document.querySelector("input[name=surname]").value;
+        const name = document.querySelector("input[name=name]").value;
+        const birth = document.querySelector("input[name=birth]").value;
+        const address = document.querySelector("input[name=address]").value;
+        const city = document.querySelector("input[name=city]").value;
+        const phone = document.querySelector("input[name=phone]").value;
+        const email = document.querySelector("input[name=email]").value;
+        const password = document.querySelector("input[name=password]").value;
+        const card_identity = document.querySelector(
+          "input[name=card_identity]"
+        ).value;
+        const response = await fetch("http://localhost:3000/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            surname,
+            name,
+            birth,
+            address,
+            city,
+            phone,
+            email,
+            password,
+            card_identity,
+          }),
+        });
+        let data = await response.json();
+        window.location.href = "index.html";
+      };
+    </script>
+  </body>
+</html>

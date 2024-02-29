@@ -34,7 +34,15 @@ const createUser = (req, res) => {
   prisma.user
     .create({
       data: {
+        surname: user.surname,
         name: user.name,
+        birth: user.birth,
+        address: user.address,
+        city: user.city,
+        phone: user.phone,
+        email: user.email,
+        password: user.password,
+        card_idenity: user.card_idenity,
       },
     })
     .then((user) => {
